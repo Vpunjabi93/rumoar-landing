@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Lock, FileSpreadsheet } from 'lucide-react';
-import AIWorkflow from './AIWorkflow';
+import SkillEcosystem from './SkillEcosystem';
 
 const Traction: React.FC = () => {
   return (
@@ -53,10 +53,10 @@ const Traction: React.FC = () => {
                 <span className="px-3 py-1 bg-green-900/20 text-green-400 text-xs rounded-full border border-green-900/30 font-mono">UNLOCKED</span>
               </div>
               <p className="text-neutral-400 text-sm mb-2">
-                We don't need a massive studio budget. GPT writes the hooks. Nano Banana renders the visuals. Higgsfield adds the motion. Here's what that pipeline actually produces:
+                We don't need a massive studio budget. Every tool in our stack speaks to the same source file — keeping brand voice consistent across every reel, carousel, and caption:
               </p>
-              {/* Interactive terminal — pick a content type and watch it execute */}
-              <AIWorkflow />
+              {/* Skill ecosystem constellation */}
+              <SkillEcosystem />
             </motion.div>
 
             <motion.div 
