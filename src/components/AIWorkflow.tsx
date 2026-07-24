@@ -96,7 +96,6 @@ const AIWorkflow: React.FC = () => {
   const reset = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setStatus('idle');
-    setSelected(null);
     setLogs([]);
     setOutput(null);
   };
