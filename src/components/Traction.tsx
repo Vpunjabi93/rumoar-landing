@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Lock, FileSpreadsheet } from 'lucide-react';
+import AIWorkflow from './AIWorkflow';
 
 const Traction: React.FC = () => {
   return (
@@ -45,32 +46,17 @@ const Traction: React.FC = () => {
             </motion.div>
 
             <motion.div 
-              whileHover={{ y: -5 }}
               className="bg-[#111] p-8 rounded-2xl border border-brand-accent/20"
             >
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex justify-between items-center mb-2">
                 <h4 className="text-2xl font-display text-white">The AI Cheat Code</h4>
                 <span className="px-3 py-1 bg-green-900/20 text-green-400 text-xs rounded-full border border-green-900/30 font-mono">UNLOCKED</span>
               </div>
-              <div className="space-y-4">
-                <p className="text-neutral-400 text-sm">
-                  We don't need a massive studio budget to produce premium campaigns. Here is the exact pipeline bringing our visual cost down to near-zero:
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div className="bg-neutral-900/50 p-4 rounded-xl border border-neutral-800">
-                    <h5 className="text-brand-accent font-medium mb-1">1. GPT / Gemini</h5>
-                    <p className="text-xs text-neutral-500">For aggressive, rapid-fire copywriting, script generation, and translating Voice of Customer data into raw creative hooks.</p>
-                  </div>
-                  <div className="bg-neutral-900/50 p-4 rounded-xl border border-neutral-800">
-                    <h5 className="text-brand-accent font-medium mb-1">2. Nano Banana</h5>
-                    <p className="text-xs text-neutral-500">Our visual engine for creating hyper-realistic, studio-quality lifestyle photography and product mockups without booking a single photographer.</p>
-                  </div>
-                  <div className="bg-neutral-900/50 p-4 rounded-xl border border-neutral-800 sm:col-span-2">
-                    <h5 className="text-brand-accent font-medium mb-1 flex items-center gap-2">3. Higgsfield <span className="text-[9px] bg-white text-black px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Paid Route</span></h5>
-                    <p className="text-xs text-neutral-500">When we need to escalate to high-end motion. We use Higgsfield for generating premium, cinematic video campaigns from our still assets to drive top-of-funnel awareness.</p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-neutral-400 text-sm mb-2">
+                We don't need a massive studio budget. GPT writes the hooks. Nano Banana renders the visuals. Higgsfield adds the motion. Here's what that pipeline actually produces:
+              </p>
+              {/* Interactive terminal — pick a content type and watch it execute */}
+              <AIWorkflow />
             </motion.div>
 
             <motion.div 
