@@ -26,17 +26,17 @@ const THINKING_LOGS = [
 // The simulated output for each "content type"
 const OUTPUTS: Record<string, { title: string; content: string[] }> = {
   carousel: {
-    title: 'CAROUSEL OUTPUT — "The Watch Stack"',
+    title: 'CAROUSEL OUTPUT — The Watch Stack',
     content: [
-      '**Hook (Slide 1 — Full Look):** The guy in the corner that everyone clocks but nobody can figure out.',
-      '**Slide 2 — Neck Detail:** One pendant. No rules. All statement.',
-      '**Slide 3 — Wrist Detail:** A G-Shock next to a leather strap. Intentional chaos.',
-      '**Caption:** You don't need more clothes. You need the right things in the right places. → Link in bio.',
+      '**Hook (Slide 1 - Full Look):** The guy in the corner that everyone clocks but nobody can figure out.',
+      '**Slide 2 - Neck Detail:** One pendant. No rules. All statement.',
+      '**Slide 3 - Wrist Detail:** A G-Shock next to a leather strap. Intentional chaos.',
+      "**Caption:** You don't need more clothes. You need the right things in the right places. Link in bio.",
       '**Hashtags:** #MensStyle #RUMOAR #AccessoriesForMen #MensJewelry #IndianMensFashion',
     ],
   },
   hero: {
-    title: 'HERO CONTENT — "Start a Rumour"',
+    title: 'HERO CONTENT — Start a Rumour',
     content: [
       '**Hook:** There is something new in town. And it is not a brand. It is a feeling.',
       '**Visual Direction (Higgsfield):** Slow cinematic push on a man adjusting his collar — neck pendant catches light.',
@@ -46,12 +46,12 @@ const OUTPUTS: Record<string, { title: string; content: string[] }> = {
     ],
   },
   styling: {
-    title: 'HUB CONTENT — "How To Stack"',
+    title: 'HUB CONTENT — How To Stack',
     content: [
       '**Hook:** 3 rules for wearing 3 things at once without looking like a jewellery store.',
       '**Rule 1:** Metals match. Gold chain, gold watch. Non-negotiable.',
-      '**Rule 2:** One statement, the rest whisper. Big ring → subtle bracelet.',
-      '**Rule 3:** Neck + wrist never compete. Choose your moment.',
+      '**Rule 2:** One statement, the rest whisper. Big ring means subtle bracelet.',
+      '**Rule 3:** Neck and wrist never compete. Choose your moment.',
       '**Closing:** This is the playbook. RUMOAR ships the pieces.',
     ],
   },
