@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // Inline SVG avatars - no external CDN dependency
-const Avatar = ({ seed, color = '#374151' }: { seed: string; color?: string }) => {
+const Avatar = ({ seed }: { seed: string }) => {
   const hash = seed.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
   const initials = seed.slice(0, 2).toUpperCase();
   const colors = ['#7c3aed', '#0369a1', '#b45309', '#065f46', '#9f1239', '#6b21a8'];
