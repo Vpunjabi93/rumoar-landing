@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 
 type Node = {
   id: string;
@@ -22,21 +21,17 @@ const NODES: Node[] = [
 const SkillEcosystem: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hovered, setHovered] = useState<string | null>(null);
-  const [dims, setDims] = useState({ w: 600, h: 400 });
 
   useEffect(() => {
     const update = () => {
       if (svgRef.current) {
-        const rect = svgRef.current.getBoundingClientRect();
-        setDims({ w: rect.width || 600, h: rect.height || 400 });
+        svgRef.current.getBoundingClientRect();
       }
     };
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
-
-  const px = (pct: number, total: number) => (pct / 100) * total;
 
   const center = NODES.find(n => n.isCenter)!;
   const satellites = NODES.filter(n => !n.isCenter);
@@ -132,7 +127,7 @@ const SkillEcosystem: React.FC = () => {
           </g>
 
           {/* Satellite nodes */}
-          {satellites.map((node, i) => {
+          {satellites.map((node) => {
             const isActive = hovered === node.id;
             const adjustedY = node.y * 0.66;
             return (
