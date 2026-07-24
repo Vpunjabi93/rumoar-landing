@@ -1,4 +1,5 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -18,7 +19,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.warn("3D Canvas failed to load (likely a WebGL issue). Falling back gracefully.", error);
+    console.warn("3D Canvas failed to load (likely a WebGL issue). Falling back gracefully.", error, errorInfo);
   }
 
   public render() {
