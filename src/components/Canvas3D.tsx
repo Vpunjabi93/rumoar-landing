@@ -45,7 +45,6 @@ const Canvas3D: React.FC = () => {
         <AbstractShape />
         
         <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2} far={4} />
-        <Environment preset="city" />
       </Suspense>
     </Canvas>
   );

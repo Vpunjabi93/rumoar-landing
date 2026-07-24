@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Volume2, VolumeX } from 'lucide-react';
 import Canvas3D from './Canvas3D';
 import ErrorBoundary from './ErrorBoundary';
 
 const Hero: React.FC = () => {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
   return (
     <section className="relative w-full h-[100svh] flex items-center justify-center overflow-hidden border-b border-brand-gray">
       {/* 3D Background */}
@@ -40,6 +51,7 @@ const Hero: React.FC = () => {
              {/* 1080x1920 Video */}
              <div className="w-[280px] md:w-[380px] h-[500px] md:h-[675px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_60px_rgba(212,175,55,0.15)] relative group z-20 shrink-0">
                <video 
+                 ref={videoRef}
                  src={`${import.meta.env.BASE_URL}videos/intro.mp4`} 
                  autoPlay 
                  muted 
@@ -48,6 +60,14 @@ const Hero: React.FC = () => {
                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+               
+               <button 
+                 onClick={toggleMute}
+                 className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/80 backdrop-blur rounded-full text-white transition-colors z-30"
+               >
+                 {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+               </button>
+
                <div className="absolute bottom-6 left-4 right-4 text-center pointer-events-none">
                  <p className="text-xs uppercase tracking-widest text-brand-accent font-medium">The Baseline</p>
                </div>
