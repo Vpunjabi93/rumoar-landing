@@ -1,7 +1,46 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lock, FileSpreadsheet } from 'lucide-react';
+import { Lock, FileSpreadsheet, Code, Image as ImageIcon } from 'lucide-react';
 import SkillEcosystem from './SkillEcosystem';
+import nanoBananaImg from '../assets/images/nano-banana-output.jpg';
+
+const NANO_PROMPT = `{
+  "role": "system",
+  "content": {
+    "persona": "Japanese streetwear editorial photographer with a cinematic, premium style.",
+    "brand_identity": ["Rebellious", "Playful", "Clean"],
+    "instructions": [
+      "Use the exact garment image provided. Never modify the print.",
+      "Generate a CINEMATIC LOOKBOOK IMAGE — not UGC, not e-commerce.",
+      "Maintain high-end Japanese streetwear editorial tone: expressive, intentional, stylized but controlled."
+    ],
+    "garment_input": "[INSERT USER GARMENT IMAGE HERE]",
+    "model_rules": {
+      "expressions": ["soft confidence", "subtle smirk", "clean intensity", "relaxed focus", "minimal rebellious attitude"],
+      "disallowed_expressions": ["laugh", "overt joy", "goofy expressions"],
+      "posture": ["walking slowly", "standing with attitude", "leaning casually", "half-turn pose", "looking away thoughtfully"],
+      "ethnicity_default": "Japanese / East Asian unless user specifies"
+    },
+    "camera_settings": {
+      "lens": "35mm or 50mm equivalent",
+      "aperture": "f/1.8 – f/2.8",
+      "look": "cinematic, shallow depth, controlled blur",
+      "tone": "cool editorial with subtle neon accents"
+    },
+    "environment_logic": {
+      "style": "Controlled Tokyo Minimal Editorial",
+      "allowed_backgrounds": [
+        "Shibuya side streets (clean)",
+        "Shinjuku alleyway with minimal clutter",
+        "vending machine corners (subtle)",
+        "concrete walls",
+        "rooftops with railings",
+        "metro entrances",
+        "neon bokeh (soft)"
+      ]
+    }
+  }
+}`;
 
 const Traction: React.FC = () => {
   return (
@@ -156,9 +195,38 @@ const Traction: React.FC = () => {
                 <h5 className="text-brand-accent font-medium mb-2 text-lg">1. GPT / Gemini</h5>
                 <p className="text-sm text-neutral-500 leading-relaxed">For aggressive, rapid-fire copywriting, script generation, and translating Voice of Customer data into raw creative hooks.</p>
               </div>
-              <div className="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800">
+              <div className="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800 flex flex-col">
                 <h5 className="text-brand-accent font-medium mb-2 text-lg">2. Nano Banana</h5>
-                <p className="text-sm text-neutral-500 leading-relaxed">Our visual engine for creating hyper-realistic, studio-quality lifestyle photography and product mockups without booking a single photographer.</p>
+                <p className="text-sm text-neutral-500 leading-relaxed mb-4">Our visual engine for creating hyper-realistic, studio-quality lifestyle photography and product mockups without booking a single photographer.</p>
+                
+                {/* Embedded Prompt & Image */}
+                <div className="mt-auto space-y-4">
+                  <div className="bg-[#0a0a0a] rounded-lg border border-neutral-800 overflow-hidden group">
+                    <div className="flex items-center gap-2 px-3 py-2 bg-neutral-900 border-b border-neutral-800">
+                      <Code className="w-3 h-3 text-neutral-500" />
+                      <span className="text-[10px] text-neutral-500 font-mono uppercase tracking-wider">Nano_System_Prompt.json</span>
+                    </div>
+                    <div className="p-3 max-h-48 overflow-y-auto custom-scrollbar">
+                      <pre className="text-[10px] text-neutral-400 font-mono leading-relaxed">
+                        <code>{NANO_PROMPT}</code>
+                      </pre>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-[#0a0a0a] rounded-lg border border-neutral-800 overflow-hidden relative group">
+                    <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded flex items-center gap-2 border border-white/10 z-10">
+                      <ImageIcon className="w-3 h-3 text-brand-accent" />
+                      <span className="text-[9px] text-white font-mono uppercase tracking-wider">Output</span>
+                    </div>
+                    <div className="relative aspect-[4/5] w-full overflow-hidden">
+                      <img 
+                        src={nanoBananaImg} 
+                        alt="Nano Banana Output" 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800">
                 <h5 className="text-brand-accent font-medium mb-2 flex items-center gap-2 text-lg">3. Higgsfield <span className="text-[10px] bg-white text-black px-2 py-0.5 rounded uppercase font-bold tracking-wider relative -top-0.5">Paid</span></h5>
