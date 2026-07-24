@@ -52,10 +52,26 @@ const Hero: React.FC = () => {
             Every fashion thing a man needs to feel like himself — right here, in one place.
           </p>
 
-          {/* Video + CTA — responsive layout */}
-          <div className="flex flex-col sm:flex-row items-center gap-8">
-            {/* Video — taller on desktop, constrained on mobile */}
-            <div className="w-[200px] h-[355px] sm:w-[280px] sm:h-[498px] md:w-[340px] md:h-[605px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_60px_rgba(212,175,55,0.15)] relative group z-20 shrink-0">
+          {/* Hero layout: text left, video right */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 w-full">
+
+            {/* Left: Text + CTA */}
+            <div className="flex flex-col gap-5 items-center md:items-start text-center md:text-left max-w-lg">
+              <p className="text-neutral-400 max-w-xs text-sm">
+                We're not here to change a man. We're here to make him proud of his personality.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToPhilosophy}
+                className="px-8 py-4 bg-brand-light text-brand-dark font-medium rounded-full hover:bg-brand-accent transition-colors"
+              >
+                Discover the philosophy
+              </motion.button>
+            </div>
+
+            {/* Right: Video */}
+            <div className="w-[200px] h-[355px] sm:w-[260px] sm:h-[462px] md:w-[320px] md:h-[569px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_60px_rgba(212,175,55,0.15)] relative group z-20 shrink-0">
               <video
                 ref={videoRef}
                 src={`${import.meta.env.BASE_URL}videos/intro.mp4`}
@@ -79,19 +95,6 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 items-center sm:items-start">
-              <p className="text-neutral-400 max-w-xs text-sm text-center sm:text-left">
-                We're not here to change a man. We're here to make him proud of his personality.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={scrollToPhilosophy}
-                className="px-8 py-4 bg-brand-light text-brand-dark font-medium rounded-full hover:bg-brand-accent transition-colors"
-              >
-                Discover the philosophy
-              </motion.button>
-            </div>
           </div>
         </motion.div>
       </div>
