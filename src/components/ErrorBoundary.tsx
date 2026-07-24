@@ -24,8 +24,16 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      // Return a simple div or nothing if the 3D canvas fails to load
-      return <div className="w-full h-full bg-brand-dark opacity-50"></div>;
+      // Hardware acceleration disabled: fallback to a static 2D representation of the 3D element
+      return (
+        <div className="w-full h-full flex items-center justify-center bg-brand-dark opacity-60">
+          <img 
+            src={`${import.meta.env.BASE_URL}images/fallback-3d.jpg`} 
+            alt="RUMOAR 3D Element Fallback"
+            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover rounded-full mix-blend-screen opacity-70 animate-[spin_60s_linear_infinite]"
+          />
+        </div>
+      );
     }
 
     return this.props.children;
