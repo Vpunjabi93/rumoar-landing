@@ -16,21 +16,21 @@ const SKILL_NAMES = [
 const generateNodes = () => {
   const nodes = [];
   
-  // Center Node
+  // Center Node (shifted to 100, 50 for a 200x100 wide viewbox)
   nodes.push({
     id: 'center',
     label: 'RUMOAR.md',
     sublabel: 'Source of Truth',
-    x: 50,
+    x: 100,
     y: 50,
     isCenter: true,
   });
 
-  // Distribute the 39 skills across 3 rings
+  // Distribute the 39 skills across 3 rings, but make them ellipses to fit the wide view
   const rings = [
-    { count: 8, radiusX: 18, radiusY: 15 },
-    { count: 14, radiusX: 32, radiusY: 28 },
-    { count: 17, radiusX: 45, radiusY: 42 },
+    { count: 8, radiusX: 30, radiusY: 15 },
+    { count: 14, radiusX: 55, radiusY: 28 },
+    { count: 17, radiusX: 80, radiusY: 42 },
   ];
 
   let skillIndex = 0;
@@ -42,12 +42,12 @@ const generateNodes = () => {
       
       const angle = i * angleStep;
       // Add slight random jitter so it looks more organic, less rigid
-      const jitter = (Math.random() - 0.5) * 2; 
+      const jitter = (Math.random() - 0.5) * 3; 
       
       nodes.push({
         id: `skill-${skillIndex}`,
         label: SKILL_NAMES[skillIndex],
-        x: 50 + (ring.radiusX + jitter) * Math.cos(angle),
+        x: 100 + (ring.radiusX + jitter) * Math.cos(angle),
         y: 50 + (ring.radiusY + jitter) * Math.sin(angle),
         isCenter: false,
       });
@@ -80,10 +80,10 @@ const SkillEcosystem: React.FC = () => {
 
   return (
     <div className="mt-8 rounded-2xl border border-neutral-800 overflow-hidden bg-[#0a0a0a] p-2 md:p-6">
-      <div className="relative w-full" style={{ paddingBottom: '75%' }}>
+      <div className="relative w-full" style={{ paddingBottom: '50%' }}>
         <svg
           ref={svgRef}
-          viewBox="0 0 100 100"
+          viewBox="0 0 200 100"
           className="absolute inset-0 w-full h-full"
           preserveAspectRatio="xMidYMid meet"
         >
