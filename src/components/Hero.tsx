@@ -1,13 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Canvas3D from './Canvas3D';
+import ErrorBoundary from './ErrorBoundary';
 
 const Hero: React.FC = () => {
   return (
     <section className="relative w-full h-[100svh] flex items-center justify-center overflow-hidden border-b border-brand-gray">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0 opacity-60">
-        <Canvas3D />
+        <ErrorBoundary>
+          <Canvas3D />
+        </ErrorBoundary>
       </div>
 
       {/* Content */}
@@ -34,15 +37,19 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6">
-             {/* 1080x1920 Video Placeholder */}
-             <div className="w-[180px] h-[320px] bg-brand-gray rounded-xl overflow-hidden border border-neutral-800 shadow-2xl relative group">
-               <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-colors z-10">
-                 <div className="w-12 h-12 rounded-full bg-brand-light/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                   <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-brand-light border-b-[8px] border-b-transparent ml-1"></div>
-                 </div>
-               </div>
-               <div className="w-full h-full bg-neutral-900 flex items-center justify-center text-xs text-neutral-500 font-mono text-center p-4">
-                 [1080x1920 Video Placeholder]<br/>Brand Intro
+             {/* 1080x1920 Video */}
+             <div className="w-[180px] h-[320px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative group z-20">
+               <video 
+                 src="/videos/intro.mp4" 
+                 autoPlay 
+                 muted 
+                 loop 
+                 playsInline 
+                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+               <div className="absolute bottom-4 left-4 right-4 text-center pointer-events-none">
+                 <p className="text-[10px] uppercase tracking-widest text-brand-accent font-medium">The Baseline</p>
                </div>
              </div>
              

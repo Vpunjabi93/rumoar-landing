@@ -4,6 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/rumoar-landing/',
   plugins: [react()],
   resolve: {
     alias: {

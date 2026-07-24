@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, ArrowUp, ArrowDown, User, Share, MoreHorizontal } from 'lucide-react';
+import { MessageSquare, ArrowUp, ArrowDown, User } from 'lucide-react';
 
 const VoiceOfCustomer: React.FC = () => {
   return (
