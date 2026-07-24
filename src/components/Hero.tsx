@@ -38,9 +38,9 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-center gap-6">
              {/* 1080x1920 Video */}
-             <div className="w-[180px] h-[320px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative group z-20">
+             <div className="w-[280px] md:w-[380px] h-[500px] md:h-[675px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_60px_rgba(212,175,55,0.15)] relative group z-20 shrink-0">
                <video 
-                 src="/videos/intro.mp4" 
+                 src={`${import.meta.env.BASE_URL}videos/intro.mp4`} 
                  autoPlay 
                  muted 
                  loop 
@@ -48,8 +48,8 @@ const Hero: React.FC = () => {
                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
-               <div className="absolute bottom-4 left-4 right-4 text-center pointer-events-none">
-                 <p className="text-[10px] uppercase tracking-widest text-brand-accent font-medium">The Baseline</p>
+               <div className="absolute bottom-6 left-4 right-4 text-center pointer-events-none">
+                 <p className="text-xs uppercase tracking-widest text-brand-accent font-medium">The Baseline</p>
                </div>
              </div>
              
