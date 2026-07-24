@@ -19,14 +19,12 @@ const AbstractShape = () => {
         {/* A sophisticated torus knot to represent "accessories" and "completion" */}
         <torusKnotGeometry args={[1, 0.3, 256, 64]} />
         <MeshDistortMaterial 
-          color="#0a0a0a" 
-          envMapIntensity={2.5} 
-          clearcoat={1} 
-          clearcoatRoughness={0.1} 
-          metalness={1} 
-          roughness={0.1} 
-          distort={0.2} 
-          speed={1}
+          color="#D4AF37" 
+          metalness={0.4} 
+          roughness={0.3} 
+          distort={0.3} 
+          speed={1.5}
+          emissive="#1A1A1A"
         />
       </mesh>
     </Float>
