@@ -60,7 +60,6 @@ const OUTPUTS: Record<string, { title: string; content: string[] }> = {
 type ContentType = 'carousel' | 'hero' | 'styling';
 
 const AIWorkflow: React.FC = () => {
-  const [selected, setSelected] = useState<ContentType | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'complete'>('idle');
   const [logs, setLogs] = useState<string[]>([]);
   const [output, setOutput] = useState<{ title: string; content: string[] } | null>(null);
@@ -68,7 +67,6 @@ const AIWorkflow: React.FC = () => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const runPipeline = (type: ContentType) => {
-    setSelected(type);
     setStatus('loading');
     setLogs([]);
     setOutput(null);
