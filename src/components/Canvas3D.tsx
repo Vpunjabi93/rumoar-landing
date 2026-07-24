@@ -1,6 +1,6 @@
 import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, MeshDistortMaterial, ContactShadows } from '@react-three/drei';
+import { Float, MeshDistortMaterial, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 
 const AbstractShape = () => {
