@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 
 const Philosophy: React.FC = () => {
   return (
-    <section className="w-full py-32 bg-brand-dark relative z-10 border-b border-brand-gray">
+    <section id="philosophy" className="w-full py-32 bg-brand-dark relative z-10 border-b border-brand-gray">
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
       <div className="container mx-auto px-6 max-w-5xl">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}

@@ -15,8 +15,13 @@ const Hero: React.FC = () => {
     }
   };
 
+  const scrollToPhilosophy = () => {
+    const el = document.querySelector('#philosophy');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative w-full h-[100svh] flex items-center justify-center overflow-hidden border-b border-brand-gray">
+    <section className="relative w-full min-h-[100svh] flex items-center justify-center overflow-hidden border-b border-brand-gray pt-16">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0 opacity-60">
         <ErrorBoundary>
@@ -25,14 +30,14 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-center items-center md:items-start text-center md:text-left">
+      <div className="relative z-10 container mx-auto px-6 py-16 flex flex-col justify-center items-center md:items-start text-center md:text-left">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="max-w-4xl"
+          className="max-w-5xl w-full"
         >
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -47,57 +52,59 @@ const Hero: React.FC = () => {
             Every fashion thing a man needs to feel like himself — right here, in one place.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-             {/* 1080x1920 Video */}
-             <div className="w-[280px] md:w-[380px] h-[500px] md:h-[675px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_60px_rgba(212,175,55,0.15)] relative group z-20 shrink-0">
-               <video 
-                 ref={videoRef}
-                 src={`${import.meta.env.BASE_URL}videos/intro.mp4`} 
-                 autoPlay 
-                 muted 
-                 loop 
-                 playsInline 
-                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
-               
-               <button 
-                 onClick={toggleMute}
-                 className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/80 backdrop-blur rounded-full text-white transition-colors z-30"
-               >
-                 {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-               </button>
+          {/* Video + CTA — responsive layout */}
+          <div className="flex flex-col sm:flex-row items-center gap-8">
+            {/* Video — taller on desktop, constrained on mobile */}
+            <div className="w-[200px] h-[355px] sm:w-[280px] sm:h-[498px] md:w-[340px] md:h-[605px] bg-brand-dark rounded-xl overflow-hidden border border-neutral-800 shadow-[0_0_60px_rgba(212,175,55,0.15)] relative group z-20 shrink-0">
+              <video
+                ref={videoRef}
+                src={`${import.meta.env.BASE_URL}videos/intro.mp4`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
 
-               <div className="absolute bottom-6 left-4 right-4 text-center pointer-events-none">
-                 <p className="text-xs uppercase tracking-widest text-brand-accent font-medium">The Baseline</p>
-               </div>
-             </div>
-             
-             <div className="flex flex-col gap-4">
-               <p className="text-neutral-400 max-w-xs text-sm">
-                 We're not here to change a man. We're here to make him proud of his personality.
-               </p>
-               <motion.button 
-                 whileHover={{ scale: 1.05 }}
-                 whileTap={{ scale: 0.95 }}
-                 className="px-8 py-4 bg-brand-light text-brand-dark font-medium rounded-full w-fit hover:bg-brand-accent transition-colors"
-               >
-                 Discover the philosophy
-               </motion.button>
-             </div>
+              <button
+                onClick={toggleMute}
+                className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/80 backdrop-blur rounded-full text-white transition-colors z-30"
+              >
+                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              </button>
+
+              <div className="absolute bottom-6 left-4 right-4 text-center pointer-events-none">
+                <p className="text-xs uppercase tracking-widest text-brand-accent font-medium">The Baseline</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5 items-center sm:items-start">
+              <p className="text-neutral-400 max-w-xs text-sm text-center sm:text-left">
+                We're not here to change a man. We're here to make him proud of his personality.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToPhilosophy}
+                className="px-8 py-4 bg-brand-light text-brand-dark font-medium rounded-full hover:bg-brand-accent transition-colors"
+              >
+                Discover the philosophy
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </div>
-      
+
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
         <span className="text-[10px] uppercase tracking-widest text-neutral-500">Scroll</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-accent to-transparent"></div>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-accent to-transparent" />
       </motion.div>
     </section>
   );

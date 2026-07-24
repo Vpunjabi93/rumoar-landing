@@ -4,7 +4,8 @@ import { Lock, FileSpreadsheet } from 'lucide-react';
 
 const Traction: React.FC = () => {
   return (
-    <section className="w-full py-32 bg-brand-dark relative z-10 border-b border-brand-gray">
+    <section id="traction" className="w-full py-32 bg-brand-dark relative z-10 border-b border-brand-gray">
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="flex flex-col md:flex-row gap-16 items-start">
           <div className="md:w-1/3">
