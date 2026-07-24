@@ -1,22 +1,64 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-type Node = {
-  id: string;
-  label: string;
-  sublabel?: string;
-  x: number;
-  y: number;
-  isCenter?: boolean;
+// The actual marketing skill ecosystem
+const SKILL_NAMES = [
+  'product-marketing', 'copywriting', 'copy-editing', 'content-strategy', 'social',
+  'ad-creative', 'video', 'image', 'ads', 'cro', 'ab-testing', 'marketing-ideas',
+  'onboarding', 'signup', 'paywalls', 'churn-prevention', 'seo-audit', 'ai-seo',
+  'programmatic-seo', 'schema', 'site-architecture', 'cold-email', 'prospecting',
+  'sales-enablement', 'revops', 'emails', 'sms', 'customer-research',
+  'marketing-psychology', 'pricing', 'competitors', 'competitor-profiling',
+  'launch', 'free-tools', 'lead-magnets', 'directory-submissions', 'aso',
+  'referrals', 'analytics'
+];
+
+// Helper to distribute nodes in concentric rings
+const generateNodes = () => {
+  const nodes = [];
+  
+  // Center Node
+  nodes.push({
+    id: 'center',
+    label: 'RUMOAR.md',
+    sublabel: 'Source of Truth',
+    x: 50,
+    y: 50,
+    isCenter: true,
+  });
+
+  // Distribute the 39 skills across 3 rings
+  const rings = [
+    { count: 8, radiusX: 18, radiusY: 15 },
+    { count: 14, radiusX: 32, radiusY: 28 },
+    { count: 17, radiusX: 45, radiusY: 42 },
+  ];
+
+  let skillIndex = 0;
+
+  rings.forEach((ring) => {
+    const angleStep = (Math.PI * 2) / ring.count;
+    for (let i = 0; i < ring.count; i++) {
+      if (skillIndex >= SKILL_NAMES.length) break;
+      
+      const angle = i * angleStep;
+      // Add slight random jitter so it looks more organic, less rigid
+      const jitter = (Math.random() - 0.5) * 2; 
+      
+      nodes.push({
+        id: `skill-${skillIndex}`,
+        label: SKILL_NAMES[skillIndex],
+        x: 50 + (ring.radiusX + jitter) * Math.cos(angle),
+        y: 50 + (ring.radiusY + jitter) * Math.sin(angle),
+        isCenter: false,
+      });
+      skillIndex++;
+    }
+  });
+
+  return nodes;
 };
 
-const NODES: Node[] = [
-  { id: 'center', label: 'RUMOAR.md', sublabel: 'Source of Truth', x: 50, y: 50, isCenter: true },
-  { id: 'gpt',     label: 'GPT / Gemini',    sublabel: 'Hooks & copy',         x: 22, y: 14 },
-  { id: 'nano',    label: 'Nano Banana',      sublabel: 'Visual generation',    x: 78, y: 14 },
-  { id: 'higgs',   label: 'Higgsfield',       sublabel: 'Motion & video',       x: 82, y: 72 },
-  { id: 'cal',     label: 'Content Calendar', sublabel: 'Cadence & scheduling', x: 18, y: 72 },
-  { id: 'qc',      label: 'QC Checklist',     sublabel: 'Brand consistency',    x: 50, y: 88 },
-];
+const NODES = generateNodes();
 
 const SkillEcosystem: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -37,17 +79,17 @@ const SkillEcosystem: React.FC = () => {
   const satellites = NODES.filter(n => !n.isCenter);
 
   return (
-    <div className="mt-8 rounded-2xl border border-neutral-800 overflow-hidden bg-[#0a0a0a] p-6">
-      <div className="relative w-full" style={{ paddingBottom: '66%' }}>
+    <div className="mt-8 rounded-2xl border border-neutral-800 overflow-hidden bg-[#0a0a0a] p-2 md:p-6">
+      <div className="relative w-full" style={{ paddingBottom: '75%' }}>
         <svg
           ref={svgRef}
-          viewBox="0 0 100 66"
+          viewBox="0 0 100 100"
           className="absolute inset-0 w-full h-full"
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
             <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.35" />
               <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
             </radialGradient>
             <filter id="glow">
@@ -66,12 +108,29 @@ const SkillEcosystem: React.FC = () => {
               <line
                 key={`line-${node.id}`}
                 x1={center.x}
-                y1={center.y * 0.66}
+                y1={center.y}
                 x2={node.x}
-                y2={node.y * 0.66}
-                stroke={isActive ? '#D4AF37' : '#2a2a2a'}
-                strokeWidth={isActive ? 0.4 : 0.2}
-                strokeDasharray={isActive ? 'none' : '1 1'}
+                y2={node.y}
+                stroke={isActive ? '#D4AF37' : '#1a1a1a'}
+                strokeWidth={isActive ? 0.3 : 0.15}
+                strokeDasharray={isActive ? 'none' : '0.5 1'}
+                style={{ transition: 'all 0.3s ease' }}
+              />
+            );
+          })}
+
+          {/* Background web connections between adjacent nodes in rings (optional subtle webbing) */}
+          {satellites.map((node, i) => {
+            const nextNode = satellites[(i + 1) % satellites.length];
+            return (
+              <line
+                key={`web-${node.id}`}
+                x1={node.x}
+                y1={node.y}
+                x2={nextNode.x}
+                y2={nextNode.y}
+                stroke="#111"
+                strokeWidth="0.1"
                 style={{ transition: 'all 0.3s ease' }}
               />
             );
@@ -80,8 +139,8 @@ const SkillEcosystem: React.FC = () => {
           {/* Ambient center glow */}
           <circle
             cx={center.x}
-            cy={center.y * 0.66}
-            r="8"
+            cy={center.y}
+            r="12"
             fill="url(#centerGlow)"
           />
 
@@ -93,19 +152,19 @@ const SkillEcosystem: React.FC = () => {
           >
             <rect
               x={center.x - 14}
-              y={center.y * 0.66 - 5}
+              y={center.y - 5}
               width="28"
               height="10"
               rx="1.5"
               fill={hovered === 'center' ? '#1a1a1a' : '#111'}
               stroke="#D4AF37"
-              strokeWidth="0.3"
+              strokeWidth="0.4"
               filter="url(#glow)"
               style={{ transition: 'fill 0.2s ease' }}
             />
             <text
               x={center.x}
-              y={center.y * 0.66 - 1.2}
+              y={center.y - 1.2}
               textAnchor="middle"
               fontSize="1.6"
               fill="#888"
@@ -115,7 +174,7 @@ const SkillEcosystem: React.FC = () => {
             </text>
             <text
               x={center.x}
-              y={center.y * 0.66 + 2.2}
+              y={center.y + 2.2}
               textAnchor="middle"
               fontSize="2.2"
               fontWeight="bold"
@@ -128,8 +187,7 @@ const SkillEcosystem: React.FC = () => {
 
           {/* Satellite nodes */}
           {satellites.map((node) => {
-            const isActive = hovered === node.id;
-            const adjustedY = node.y * 0.66;
+            const isActive = hovered === node.id || hovered === 'center';
             return (
               <g
                 key={node.id}
@@ -137,54 +195,28 @@ const SkillEcosystem: React.FC = () => {
                 onMouseLeave={() => setHovered(null)}
                 style={{ cursor: 'default' }}
               >
-                {/* Pulse ring on hover */}
-                {isActive && (
-                  <circle
-                    cx={node.x}
-                    cy={adjustedY}
-                    r="9"
-                    fill="none"
-                    stroke="#D4AF37"
-                    strokeWidth="0.2"
-                    opacity="0.4"
-                  />
-                )}
-                <rect
-                  x={node.x - 11}
-                  y={adjustedY - 4.5}
-                  width="22"
-                  height="9"
-                  rx="1.5"
-                  fill={isActive ? '#1a1a1a' : '#111'}
-                  stroke={isActive ? '#D4AF37' : '#2a2a2a'}
-                  strokeWidth="0.3"
-                  style={{ transition: 'all 0.2s ease' }}
+                {/* Node dot */}
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r="1.2"
+                  fill={isActive ? '#D4AF37' : '#333'}
+                  style={{ transition: 'fill 0.2s ease' }}
                 />
+                
+                {/* Node Label */}
                 <text
                   x={node.x}
-                  y={adjustedY - 0.8}
+                  y={node.y + (node.y > 50 ? 2.5 : -1.5)} // Text goes above or below based on position
                   textAnchor="middle"
-                  fontSize="1.9"
-                  fontWeight="600"
-                  fill={isActive ? '#ffffff' : '#cccccc'}
+                  fontSize="1.8"
+                  fontWeight="500"
+                  fill={isActive ? '#ffffff' : '#666'}
                   fontFamily="sans-serif"
-                  style={{ transition: 'fill 0.2s ease' }}
+                  style={{ transition: 'all 0.2s ease' }}
                 >
                   {node.label}
                 </text>
-                {node.sublabel && (
-                  <text
-                    x={node.x}
-                    y={adjustedY + 2.4}
-                    textAnchor="middle"
-                    fontSize="1.4"
-                    fill={isActive ? '#D4AF37' : '#555'}
-                    fontFamily="sans-serif"
-                    style={{ transition: 'fill 0.2s ease' }}
-                  >
-                    {node.sublabel}
-                  </text>
-                )}
               </g>
             );
           })}
@@ -192,8 +224,8 @@ const SkillEcosystem: React.FC = () => {
       </div>
 
       {/* Caption */}
-      <p className="text-neutral-500 text-xs font-light mt-2 text-center">
-        The result: unified brand voice from the first hook to the final reel — all referencing the same source file.
+      <p className="text-neutral-500 text-xs font-light mt-4 text-center px-4">
+        The ecosystem: 39 specialized autonomous marketing skills. One central source of truth. The result: absolute brand consistency at hyperscale.
       </p>
     </div>
   );
